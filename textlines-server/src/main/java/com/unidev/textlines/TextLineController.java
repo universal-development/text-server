@@ -1,10 +1,31 @@
 package com.unidev.textlines;
 
+import com.unidev.textlines.dto.FileListRequest;
+import com.unidev.textlines.dto.LineRequest;
+import java.util.Collection;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
+@RestController("/api/v1")
 public class TextLineController {
 
+
+    private TextLineService textLineService;
+
+    public TextLineController(TextLineService textLineService) {
+        this.textLineService = textLineService;
+    }
+
+    @PostMapping("list")
+    public Collection<String> listFiles(@RequestBody FileListRequest fileRequest) {
+        return textLineService.listFiles(fileRequest.getPath());
+    }
+
+    @PostMapping("lines")
+    public Collection<String> fetchLines(@RequestBody LineRequest lineRequest) {
+        return textLineService.randomLines(lineRequest.getPath(),lineRequest.getCount());
+    }
 
 
 }

@@ -5,14 +5,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 @ToString
-public class LineRequest {
+public class FileListRequest {
 
     @Getter
     @Setter
     private String path;
-
-    @Getter
-    @Setter
-    private int count;
 
 }
