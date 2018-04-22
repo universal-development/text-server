@@ -10,6 +10,11 @@ buildscript {
 	}
 }
 
+
+plugins {
+	id 'io.franzbecker.gradle-lombok' version '1.8'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -20,7 +25,10 @@ sourceCompatibility = 1.8
 
 repositories {
 	mavenCentral()
+	maven { url "https://repo.spring.io/milestone" }
+
 }
+
 
 
 ext {
@@ -35,6 +43,9 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
 	compile('com.vaadin:vaadin-spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-web')
+
+	compileOnly('org.projectlombok:lombok')
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
