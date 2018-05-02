@@ -3,8 +3,11 @@ package com.unidev.textlines;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 import com.unidev.textlines.dto.FileListRequest;
+import com.unidev.textlines.dto.LineRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +29,33 @@ public class TextlinesApplicationTests {
 
 	@Test
 	public void testListingFiles() throws Exception {
-		FileListRequest pathRequest = FileListRequest.builder().path("").build();
+		FileListRequest pathRequest = FileListRequest.builder().path("*.txt").build();
 		ArrayList list = restTemplate.postForObject("http://localhost:" + port + TextLineController.API_PATH + "/list", pathRequest,
 				ArrayList.class);
 
 		assertThat(list).isNotNull();
 		assertThat(list.isEmpty()).isFalse();
 		assertThat(list).contains("test.txt");
+	}
+
+	@Test
+	public void testFileContentLoading() {
+		LineRequest lineRequest = LineRequest.builder().path("test.txt").count(1).build();
+		ArrayList list = restTemplate.postForObject("http://localhost:" + port + TextLineController.API_PATH + "/lines", lineRequest,
+				ArrayList.class);
+
+		assertThat(list).isNotNull();
+		assertThat(list.isEmpty()).isFalse();
+
+		List<String> oneOf = Arrays.asList("line1", "line2", "line3");
+		boolean containsElement = false;
+		for(String item : oneOf) {
+			if (list.contains(item)) {
+				containsElement = true;
+				break;
+			}
+		}
+		assertThat(containsElement).isTrue();
 	}
 
 
