@@ -1,24 +1,69 @@
 package com.unidev.textlines;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Objects;
+import java.util.List;
+import java.util.Random;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.io.FileUtils;
+import org.apache.tools.ant.DirectoryScanner;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 @Service
+@Log4j2
 public class TextLineService {
 
     @Value("${textline.storage:storage}")
     private String storagePath;
 
-    public Collection<String> listFiles(String path) {
-        return Arrays.asList(Objects.requireNonNull(new File(storagePath, path).list()));
+    private Random random = new Random();
+
+    public List<String> listFiles(String path) {
+        DirectoryScanner scanner = new DirectoryScanner();
+        scanner.setBasedir(storagePath);
+        scanner.setIncludes(new String[]{path});
+        scanner.scan();
+        return Arrays.asList(scanner.getIncludedFiles());
     }
 
-    public Collection<String> randomLines(String path, int count) {
-        throw new RuntimeException("Not implemented");
+    public Collection<String> randomLines(String path, int keywordCount) {
+        List<String> files = listFiles(path);
+        List<String> list = new ArrayList<>();
+        for(int keyword = 0;keyword<keywordCount;keyword++) {
+            String file = randomValue(files);
+            List<String> randomLines = getRandomLines(new File(new File(storagePath), file), 1);
+            list.addAll(randomLines);
+        }
+        return list;
     }
+
+    public List<String> getRandomLines(File file, int count) {
+
+        try {
+            List<String> lines = FileUtils.readLines(file, "UTF-8");
+            List<String> results = new ArrayList<>();
+
+            for(int id = 0;id<count;id++) {
+                String line = randomValue(lines);
+                results.add(line);
+            }
+
+            return results;
+        } catch (IOException e) {
+            e.printStackTrace();
+            log.error("Failed to read file {}", file, e);
+            return new ArrayList<>();
+        }
+    }
+
+    private String randomValue(List<String> items) {
+        int id = random.nextInt(items.size());
+        return items.get(id);
+    }
+
 
 }
