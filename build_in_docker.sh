@@ -1,4 +1,4 @@
 #!/bin/bash
 
 dir=`pwd`
-docker run  --rm openjdk:10 -v $dir:/app /app/gradlew clean build
+docker run -i -t  --rm openjdk:10 -v $dir:/app /app/gradlew clean build

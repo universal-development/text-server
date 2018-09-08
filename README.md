@@ -1,6 +1,20 @@
 # text-server
 Service for storing texts in one place 
 
+## Build
+
+Compile and tests execution
+
+`./gradlew clean build`
+
+Docker image build
+
+`docker build . -t text-server:latest`
+
+Docker container launching from docker image:
+
+`docker run -i -t --rm  -p 8080:8080 -v /tmp:/app/storage text-server:latest`
+
 License
 =======
  
