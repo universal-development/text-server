@@ -17,6 +17,34 @@ Docker container launching from docker image:
 
 Swagger UI will be available on: `http://localhost:8080/swagger-ui.html`
 
+# Text lines client
+
+Codegen CLI:
+
+```
+java -jar swagger-codegen-cli.jar generate \
+  -i http://localhost:8080/v2/api-docs \
+  --api-package com.unidev.textlines.client.api \
+  --model-package com.unidev.textlines.petstore.client.model \
+  --invoker-package com.unidev.textlines.client.invoker \
+  --group-id com.unidev \
+  --artifact-id textlines-client \
+  --artifact-version 0.0.1-SNAPSHOT \
+  -l java \
+  --additional-properties java8=true \
+  --library resttemplate \
+  -o textlines-client 
+ ```
+
+
+### Links
+
+Swagger codegen:
+`https://search.maven.org/classic/remotecontent?filepath=io/swagger/swagger-codegen-cli/2.2.3/swagger-codegen-cli-2.2.3.jar`
+
+Swagger api docs:
+`http://localhost:8080/v2/api-docs`
+
 License
 =======
  

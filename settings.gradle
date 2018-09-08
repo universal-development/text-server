@@ -1,1 +1,2 @@
 include "textlines-server"
+include "textlines-client"
