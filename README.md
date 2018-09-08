@@ -24,15 +24,15 @@ Codegen CLI:
 ```
 java -jar swagger-codegen-cli.jar generate \
   -i http://localhost:8080/v2/api-docs \
-  --api-package com.unidev.textlines.client.api \
-  --model-package com.unidev.textlines.petstore.client.model \
+  --api-package com.unidev.textlines.client \
+  --model-package com.unidev.textlines.client \
   --invoker-package com.unidev.textlines.client.invoker \
   --group-id com.unidev \
   --artifact-id textlines-client \
   --artifact-version 0.0.1-SNAPSHOT \
   -l java \
-  --additional-properties java8=true \
-  --library resttemplate \
+  --additional-properties dateLibrary=java8 \
+  --library okhttp-gson \
   -o textlines-client 
  ```
 
