@@ -1,4 +1,14 @@
 
 subprojects {
     apply plugin: 'java'
+
+    apply plugin: 'maven'
+    apply plugin: 'idea'
+    
+    // internal env configuration -Dunidev
+    if (project.hasProperty('unidev')) {
+        apply from: 'http://dev.local/gradle/uploadArchivesSftp.groovy'
+        apply from: 'http://dev.local/gradle/defaultRepositories.groovy'
+        apply from: 'http://dev.local/gradle/javadoc.groovy'
+    }
 }
