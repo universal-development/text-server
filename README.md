@@ -13,7 +13,9 @@ Docker image build
 
 Docker container launching from docker image:
 
-`docker run -i -t --rm  -p 8080:8080 -v /tmp:/app/storage text-server:latest`
+`docker run -i -t --rm  -p 8080:8080 -v $(pwd)/storage:/storage text-server:latest`
+
+Swagger UI will be available on: `http://localhost:8080/swagger-ui.html`
 
 License
 =======
