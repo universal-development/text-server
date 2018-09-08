@@ -1,6 +1,6 @@
 buildscript {
 	ext {
-		springBootVersion = '1.5.9.RELEASE'
+		springBootVersion = '2.0.0.RELEASE'
 	}
 	repositories {
 		mavenCentral()
@@ -10,10 +10,16 @@ buildscript {
 	}
 }
 
-
 plugins {
 	id 'io.franzbecker.gradle-lombok' version '1.8'
 }
+
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -21,7 +27,7 @@ apply plugin: 'org.springframework.boot'
 
 group = 'com.unidev'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = 1.8
+sourceCompatibility = 10
 
 repositories {
 	mavenCentral()
@@ -29,10 +35,9 @@ repositories {
 
 }
 
-
-
-ext {
-	vaadinVersion = '8.1.0'
+lombok {
+	version = '1.18.2'
+	sha256 = ""
 }
 
 dependencies {
@@ -43,19 +48,18 @@ dependencies {
 	compile 'org.apache.ant:ant:1.9.5'
 
 	compile "org.slf4j:slf4j-api:1.7.21"
-	compile "ch.qos.logback:logback-classic:1.1.7"
+	compile 'ch.qos.logback:logback-classic'
 
+	compile("javax.xml.bind:jaxb-api:2.3.0")
+	compile("com.sun.xml.bind:jaxb-core:2.2.11")
+	compile("com.sun.xml.bind:jaxb-impl:2.2.11")
+	compile("javax.activation:activation:1.1.1")
+
+	compile('org.springframework.boot:spring-boot-starter-actuator')
 	compile('org.springframework.boot:spring-boot-starter-hateoas')
-	compile('com.vaadin:vaadin-spring-boot-starter')
 	compile('org.springframework.boot:spring-boot-starter-web')
 
 	compileOnly('org.projectlombok:lombok')
 
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-dependencyManagement {
-	imports {
-		mavenBom "com.vaadin:vaadin-bom:${vaadinVersion}"
-	}
 }
