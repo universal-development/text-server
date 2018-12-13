@@ -13,16 +13,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class TextlinesApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(TextlinesApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(TextlinesApplication.class, args);
+    }
 
-	@Bean
-	public Docket apiDocs() {
-		return new Docket(DocumentationType.SWAGGER_2)
-				.select()
-				.apis(RequestHandlerSelectors.any())
-				.paths(PathSelectors.any())
-				.build();
-	}
+    @Bean
+    public Docket apiDocs() {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .select()
+                .apis(RequestHandlerSelectors.any())
+                .paths(PathSelectors.any())
+                .build();
+    }
 }

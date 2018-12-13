@@ -28,7 +28,7 @@ public class TextLineController {
 
     @PostMapping("lines")
     public Collection<String> fetchLines(@RequestBody LineRequest lineRequest) {
-        return textLineService.randomLines(lineRequest.getPath(),lineRequest.getCount());
+        return textLineService.randomLines(lineRequest.getPath(), lineRequest.getCount());
     }
 
 

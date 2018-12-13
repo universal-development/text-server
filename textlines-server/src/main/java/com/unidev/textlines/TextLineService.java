@@ -30,7 +30,7 @@ public class TextLineService {
     public Collection<String> randomLines(String path, int keywordCount) {
         List<String> files = listFiles(path);
         List<String> list = new ArrayList<>();
-        for(int keyword = 0;keyword<keywordCount;keyword++) {
+        for (int keyword = 0; keyword < keywordCount; keyword++) {
             String file = randomValue(files);
             List<String> randomLines = getRandomLines(new File(new File(storagePath), file), 1);
             list.addAll(randomLines);
@@ -44,7 +44,7 @@ public class TextLineService {
             List<String> lines = FileUtils.readLines(file, "UTF-8");
             List<String> results = new ArrayList<>();
 
-            for(int id = 0;id<count;id++) {
+            for (int id = 0; id < count; id++) {
                 String line = randomValue(lines);
                 results.add(line);
             }
