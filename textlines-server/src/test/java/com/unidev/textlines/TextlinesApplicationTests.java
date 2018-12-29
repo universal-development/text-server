@@ -58,6 +58,27 @@ public class TextlinesApplicationTests {
 		assertThat(containsElement).isTrue();
 	}
 
+	@Test
+	public void testListingFilesFromFolder() throws Exception {
+		FileListRequest pathRequest = FileListRequest.builder().path("folder1/*.txt").build();
+		ArrayList list = restTemplate.postForObject("http://localhost:" + port + TextLineController.API_PATH + "/list", pathRequest,
+				ArrayList.class);
+
+		assertThat(list).isNotNull();
+		assertThat(list.isEmpty()).isFalse();
+		assertThat(list).contains("folder1/test2.txt");
+	}
+
+	@Test
+	public void testListingMissingFiles() {
+		FileListRequest pathRequest = FileListRequest.builder().path("folder2/*.txt").build();
+		ArrayList list = restTemplate.postForObject("http://localhost:" + port + TextLineController.API_PATH + "/list", pathRequest,
+				ArrayList.class);
+
+		assertThat(list).isNotNull();
+		assertThat(list.isEmpty()).isTrue();
+	}
+
 
 	@Test
 	public void contextLoads() {

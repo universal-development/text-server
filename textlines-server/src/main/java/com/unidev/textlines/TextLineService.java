@@ -34,7 +34,6 @@ public class TextLineService {
         Map<String, List<String>> newCache = new ConcurrentHashMap<>();
         DirectoryScanner scanner = new DirectoryScanner();
         scanner.setBasedir(storagePath);
-        scanner.setIncludes(new String[]{"*"});
         scanner.scan();
         log.info("Loading files from {}", storagePath);
         for (String file : scanner.getIncludedFiles()) {
